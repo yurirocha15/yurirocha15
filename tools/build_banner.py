@@ -40,7 +40,7 @@ MONO = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace"
 FONT = 19
 CHAR_W = FONT * 0.6          # textLength pins every glyph to this advance
 TYPE, HOLD, DELETE, GAP = 0.055, 1.8, 0.025, 0.35
-ROBOT_LOOP = 6.4             # seconds, the scene's own cycle
+ROBOT_LOOP = 22.76           # seconds, the palletizer loop: 6 boxes x 3.61 s, then 1.1 s to clear
 
 
 def typing_timeline():
