@@ -1,0 +1,74 @@
+name: Update README cards
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cards:
+    runs-on: ubuntu-latest
+    env:
+      STYLE: bg_color=151713&border_color=34464a&title_color=d39b2a&icon_color=d39b2a&text_color=e3e2d8
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: mcp-cpp-sdk
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=yurirocha15&repo=mcp-cpp-sdk&description_lines_count=2&${{ env.STYLE }}
+          path: profile/pin-mcp-cpp-sdk.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: topic
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=yurirocha15&repo=topic&description_lines_count=2&${{ env.STYLE }}
+          path: profile/pin-topic.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: explainable-palletizer
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=doosan-robotics&repo=explainable-palletizer&description_lines_count=2&${{ env.STYLE }}
+          path: profile/pin-explainable-palletizer.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: mcp-ros2
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: pin
+          options: username=yurirocha15&repo=mcp-ros2&description_lines_count=2&${{ env.STYLE }}
+          path: profile/pin-mcp-ros2.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Stats
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: stats
+          options: username=yurirocha15&show_icons=true&include_all_commits=true&hide=stars,issues&show=prs_merged&card_width=400&ring_color=d39b2a&${{ env.STYLE }}
+          path: profile/stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Top languages
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: top-langs
+          options: username=yurirocha15&layout=compact&langs_count=6&card_width=400&hide=hack,assembly,scilab,css,html,tex,jupyter%20notebook&${{ env.STYLE }}
+          path: profile/top-langs.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/*.svg
+          git diff --cached --quiet && exit 0
+          git commit -m "Update README cards"
+          git push
